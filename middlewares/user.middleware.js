@@ -1,6 +1,6 @@
-const user_model=require("../controllers/user.controller")
+const user_model=require("../models/user.model")
 const jwt=require("jsonwebtoken")
-const user_config=require("../configs/user.config")
+
 
 
 const verifySignUpBody = async (req, res, next)=>{
@@ -23,7 +23,7 @@ const verifySignUpBody = async (req, res, next)=>{
         
 
         //Check if the user with the same username is already present
-        const user = await user_model.findOne({userId : req.body.username})
+        const user = await user_model.findOne({username : req.body.username})
 
         if(user){
             return res.status(400).send({

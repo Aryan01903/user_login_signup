@@ -15,4 +15,10 @@ module.exports = (app)=>{
      * POST localhost:8000/user_login_signup/api/v1/auth/signin
      */
     app.post("/user_login_signup/api/v1/auth/signin",[userMW.verifySignInBody],userController.signin)
+
+    /**
+     * GET
+     * localhost:8000/user_login_signup/api/v1/user_model
+     */
+    app.get("/user_login_signup/api/v1/user_model",userController.getAllUser_model)
 }

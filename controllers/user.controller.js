@@ -1,8 +1,7 @@
 const bcrypt=require("bcrypt")
-const user_models=require("../models/user.model")
-const jwt=require("jsonwebtoken")
 const user_model=require("../models/user.model")
-
+const jwt=require("jsonwebtoken")
+const secret=require("../configs/user.config")
 exports.signup= async (req,res)=>{
     /**
      * logic to create user
@@ -15,12 +14,12 @@ exports.signup= async (req,res)=>{
 
     }
     try{
-        const user_created=await user_models.create(userObj)
+        const user_created=await user_model.create(userObj)
         const res_obj={
-        username : user_created.username,
-        email : user_created.email,
-        createdAt : user_created.createdAt,
-        updatedAt : user_created.updatedAt
+            username : user_created.username,
+            email : user_created.email,
+            createdAt : user_created.createdAt,
+            updatedAt : user_created.updateAt
     }
     res.status(201).send(res_obj)
     }catch(err){
@@ -57,4 +56,9 @@ exports.signin=async(req,res)=>{
    })
 
 
+}
+
+
+exports.getAllUser_model=(req,res)=>{
+    res.status(200).send(JSON.stringify(user_model))
 }
